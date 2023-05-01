@@ -1,0 +1,16 @@
+<table>
+    <thead>
+    <tr>
+        <th>운동 부위</th>
+        <th>운동 날짜</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="workout : ${workoutList}">
+        <td>
+            <a th:href="@{|/workout/detail/${workout.id}|}" th:text="${workout.subject}"></a>
+        </td>
+        <td th:text="${workout.workDate}"></td>
+    </tr>
+    </tbody>
+</table>

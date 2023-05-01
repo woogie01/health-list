@@ -1,0 +1,14 @@
+<h1 th:text="${workout.subject}"></h1>
+<div th:text="${workout.content}"></div>
+
+<h5 th:text="|${#lists.size(workout.dietList)}개의 식단 등록이 있습니다.|"></h5>
+<div>
+    <ul>
+        <li th:each="diet : ${workout.dietList}" th:text="${diet.content}"></li>
+    </ul>
+</div>
+
+<form th:action="@{|/diet/create/${workout.id}|}" method="post">
+    <label for="content"></label><textarea name="content" id="content" rows="15"></textarea>
+    <input type="submit" value="식단 등록">
+</form>
