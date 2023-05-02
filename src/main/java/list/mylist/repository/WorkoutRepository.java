@@ -1,7 +1,6 @@
 package list.mylist.repository;
 
 import list.mylist.entity.Workout;
-import org.hibernate.jdbc.Work;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
