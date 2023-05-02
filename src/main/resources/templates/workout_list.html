@@ -1,5 +1,8 @@
-<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
-<div class="container my-3">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
     <table>
         <thead>
         <tr>
@@ -18,4 +21,6 @@
         </tr>
         </tbody>
     </table>
+    <a th:href="@{/workout/create}" class="btn btn-primary">운동 등록하기</a>
 </div>
+</html>

@@ -1,13 +1,15 @@
 package list.mylist.controller;
 
+import jakarta.validation.Valid;
+import list.mylist.DietForm;
+import list.mylist.WorkoutForm;
 import list.mylist.entity.Workout;
 import list.mylist.service.WorkoutService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,9 +32,25 @@ public class WorkoutController {
     }
 
     @GetMapping(value = "/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id) {
+    public String detail(Model model, @PathVariable("id") Integer id, DietForm dietForm) {
         Workout workout = this.workoutService.getWorkout(id);
         model.addAttribute("workout", workout);
         return "workout_detail";
+    }
+
+    @GetMapping("/create")
+    public String workoutCreate(WorkoutForm workoutForm) {
+        return "workout_form";
+    }
+
+    @PostMapping("/create")
+    // @Valid : WorkoutForm @NotEmpty, @Size 검사
+    // BindingResult : 검사 결과
+    public String workoutCreate(@Valid WorkoutForm workoutForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "workout_form";
+        }
+        this.workoutService.create(workoutForm.getSubject(), workoutForm.getContent());
+        return "redirect:/workout/list"; // 질문 저장후 질문목록으로 이동
     }
 }

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,5 +31,13 @@ public class WorkoutService {
         } else {
             throw new DataNotFoundException("운동 기록을 찾지 못했습니다.");
         }
+    }
+
+    public void create(String subject, String content) {
+        Workout workout = new Workout();
+        workout.setSubject(subject);
+        workout.setContent(content);
+        workout.setWorkDate(LocalDateTime.now());
+        this.workoutRepository.save(workout);
     }
 }
